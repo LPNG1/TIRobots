@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.lejos.ev3.ldt.LEJOS_EV3_LIBRARY_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="jsonsimple"/>
+	<classpathentry kind="lib" path="jsonsimple/library/json-simple-1.1.1.jar" sourcepath="jsonsimple/sources/json-simple-1.1.1-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
