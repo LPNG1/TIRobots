@@ -8,7 +8,7 @@ import lejos.hardware.port.SensorPort;
  * @author John
  *
  */
-public class RobotSensor {
+public abstract class RobotSensor {
 
 	protected SensorType type;
 	protected int portName;
@@ -66,17 +66,11 @@ public class RobotSensor {
 	/**
 	 * Reads a sensor and returns its current value
 	 */
-	public double read() {
-		//Should be implemented per sensor
-		return 0;
-	}
+	public abstract double read();
 	
 	/**
 	 * Resets or calibrates a sensor
 	 */
-	public void reset() {
-		//Should be implemented per sensor
-		return;
-	}
+	public abstract void reset();
 	
 }

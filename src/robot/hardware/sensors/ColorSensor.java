@@ -28,4 +28,10 @@ public class ColorSensor extends RobotSensor{
 		this.s.fetchSample(sample, 0);
 		return sample[0];
 	}
+
+	@Override
+	public void reset() {
+		// This sensor can't reset
+		return;
+	}
 }

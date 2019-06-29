@@ -1,38 +1,23 @@
 package main;
 
-import org.json.simple.JSONArray;
-
-import communication.Communicator;
-import data.JSONCreator;
-import robot.RobotMap;
-import robot.hardware.motors.LargeMotor;
-import robot.hardware.sensors.TouchSensor;
-
 public class MainClass {
-
+	
 	public static void main(String[] args) {
 		
-		Communicator.init();
+		/**
+		 * logic:
+		 * this needs to have a main loop which waits for either a "command" or a "match"
+		 * status. when command is active it needs to be able to stop.
+		 * 
+		 * when match active is received it interrupts all commands and sets the robot up for a match
+		 * during a match the robot runs auto for 15 seconds, and uses gametime to keep
+		 * track of the status. when gametime is 0 (use server time not local time) match is still
+		 * enabled but state is endgame. after referees submit and the match is "complete"
+		 * the state changes to match disabled and the robot can now respond to commands again
+		 * (returns to main loop)
+		 * 
+		 */
 		
-		LargeMotor leftMotor = new LargeMotor("B");
-		LargeMotor rightMotor = new LargeMotor("C");
-		TouchSensor t = new TouchSensor(1);
-		
-		JSONArray msg = JSONCreator.createSendableJSON(RobotMap.getSensors(), RobotMap.getMotors());
-		System.out.println(msg);
-		Communicator.sendMessage(msg);
-//		
-//		long time = System.currentTimeMillis();
-//		
-//		while(!Communicator.hasNextMessage());
-//		
-//		while (Button.ESCAPE.isUp()) {
-//			
-//			JoystickData j = new JoystickData(Communicator.getNextMsg());
-//			
-//			System.out.println(j.getComponentValue(JoystickComponent.BUTTON_A));
-//			
-//		}
 		
 	}
 	

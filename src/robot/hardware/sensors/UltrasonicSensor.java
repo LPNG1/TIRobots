@@ -35,4 +35,10 @@ public class UltrasonicSensor extends RobotSensor{
 		
 		return sum/5;
 	}
+
+	@Override
+	public void reset() {
+		// This sensor can't reset
+		return;
+	}
 }

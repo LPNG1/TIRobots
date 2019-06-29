@@ -61,4 +61,5 @@ public class LargeMotor extends RobotMotor{
 		this.setPower(power);
 		//TODO: implement in respect to thread interruptions
 	}
+	
 }

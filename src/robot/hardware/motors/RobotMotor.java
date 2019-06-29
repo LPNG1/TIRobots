@@ -3,7 +3,7 @@ package robot.hardware.motors;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.Port;
 
-public class RobotMotor {
+public abstract class RobotMotor {
 
 	private MotorType type;
 	private String portName;
@@ -58,61 +58,40 @@ public class RobotMotor {
 	 * Set motor power
 	 * @param power % of power between -100 and 100, negative values go backwards
 	 */
-	public void setPower(int power) {
-		//Should be implemented on a per motor basis
-		return;
-	}
+	public abstract void setPower(int power);
 	
 	/**
 	 * Stops the motor
 	 */
-	public void brake() {
-		//Should be implemented on a per motor basis
-		return;
-	}
+	public abstract void brake();
 	
 	/**
 	 * Stops powering the motor until it coasts to a stop
 	 */
-	public void coast() {
-		//Should be implemented on a per motor basis
-		return;
-	}
+	public abstract void coast();
 	
 	/**
 	 * Resets the motor's encoder
 	 */
-	public void resetEncoder() {
-		//Should be implemented on a per motor basis
-		return;
-	}
+	public abstract void resetEncoder();
 	
 	/**
 	 * Reads the motors encoder
 	 * @return the value of the motor's encoder, in degrees
 	 */
-	public int readEncoder() {
-		//Should be implemented on a per motor basis
-		return 0;
-	}
+	public abstract int readEncoder();
 	
 	/**
 	 * Drives the motor for set power until further instruction
 	 * @param power
 	 */
-	public void drive(int power) {
-		//Should be implemented on a per motor basis
-		return;
-	}
+	public abstract void drive(int power);
 	
 	/**
 	 * Drive the motor for set power a certain amount of degrees
 	 * @param power 
 	 * @param degrees
 	 */
-	public void driveDegrees(int power, int degrees) {
-		//Should be implemented on a per motor basis
-		return;
-	}
+	public abstract void driveDegrees(int power, int degrees);
 	
 }

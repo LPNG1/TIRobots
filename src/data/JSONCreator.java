@@ -35,6 +35,7 @@ public class JSONCreator {
 				sensor.put("port", sensors[i].getPort());
 				sensor.put("type", sensors[i].getType());
 				sensor.put("value", sensors[i].read());
+				
 				sensorList.add(sensor);
 			}
 		}
@@ -61,7 +62,7 @@ public class JSONCreator {
 				JSONObject motor = new JSONObject();
 				motor.put("port", motors[i].getPort());
 				motor.put("type", motors[i].getType());
-				motor.put("value", motors[i].readEncoder());
+				motor.put("encoder-value", motors[i].readEncoder());
 				motorList.add(motor);
 			}
 		}

@@ -18,13 +18,19 @@ public class Communicator {
 	
 	private static JSONParser parser = new JSONParser();
 	
+	/**
+	 * Initializes communication, waits for connection and creates components
+	 */
 	public static void init() {
 		connectToDS();
 		createPrintStream();
 		createScanner();
 	}
 	
-	public static void connectToDS(){
+	/**
+	 * Wait to receive connection from driver station
+	 */
+	private static void connectToDS(){
 		try {
 			ServerSocket ss = new ServerSocket(4590);
 			s = ss.accept();
@@ -35,7 +41,10 @@ public class Communicator {
 		}
 	}
 	
-	public static void createScanner() {
+	/**
+	 * Create a scanner that reads messages
+	 */
+	private static void createScanner() {
 		try {
 			reader = new Scanner(s.getInputStream());
 		} catch (IOException e) {
@@ -44,7 +53,10 @@ public class Communicator {
 		}
 	}
 	
-	public static void createPrintStream() {
+	/**
+	 * Creates a print stream that sends messages
+	 */
+	private static void createPrintStream() {
 		try {
 			ps = new PrintStream(s.getOutputStream());
 		} catch (IOException e) {
@@ -53,10 +65,18 @@ public class Communicator {
 		}
 	}
 	
+	/**
+	 * Sends a JSON message
+	 * @param msg
+	 */
 	public static void sendMessage(JSONArray msg) {
 		ps.println(msg);
 	}
 	
+	/**
+	 * Returns the next message in the queue
+	 * @return
+	 */
 	public static JSONArray getNextMsg() {
 		try {
 			return (JSONArray) parser.parse(reader.nextLine());
@@ -67,6 +87,10 @@ public class Communicator {
 		return null;
 	}
 	
+	/**
+	 * Determines weather a message is waiting to be read
+	 * @return
+	 */
 	public static boolean hasNextMessage() {
 		return reader.hasNext();
 	}
