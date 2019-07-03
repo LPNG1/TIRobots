@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 
 import communication.Communicator;
 import data.JSONCreator;
+import lejos.hardware.Button;
 import robot.RobotMap;
 import robot.hardware.motors.LargeMotor;
 import robot.hardware.motors.MediumMotor;
@@ -22,8 +23,7 @@ public class TestMain {
 		TouchSensor t = new TouchSensor(2);
 		GyroSensor gyro = new GyroSensor(1);
 		
-		long time = System.currentTimeMillis();
-		while (System.currentTimeMillis() - time < 10000) {
+		while (Button.ESCAPE.isUp()) {
 			JSONArray msg = JSONCreator.createSendableJSON(RobotMap.getSensors(), RobotMap.getMotors());
 			Communicator.sendMessage(msg);
 

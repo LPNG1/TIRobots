@@ -32,7 +32,7 @@ public class JSONCreator {
 		for (int i = 0; i < sensors.length; i++) {
 			if (sensors[i] != null) {
 				JSONObject sensor = new JSONObject();
-				sensor.put("port", sensors[i].getPort());
+				sensor.put("port", Integer.toString(sensors[i].getPort()));
 				sensor.put("type", sensors[i].getType());
 				sensor.put("value", sensors[i].read());
 				
