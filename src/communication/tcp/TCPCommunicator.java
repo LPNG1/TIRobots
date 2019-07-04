@@ -1,7 +1,8 @@
-package communication;
+package communication.tcp;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -10,11 +11,17 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class Communicator {
+/**
+ * TCP Communication utilities
+ * @author John
+ *
+ */
+public class TCPCommunicator {
 	
-	public static Socket s;
-	public static PrintStream ps;
-	public static Scanner reader;
+	private static Socket TCPsendSocket;
+	private static Socket TCPrecSoket;
+	private static PrintStream ps;
+	private static Scanner reader;
 	
 	private static JSONParser parser = new JSONParser();
 	
@@ -29,44 +36,55 @@ public class Communicator {
 	
 	/**
 	 * Wait to receive connection from driver station
+	 * TODO: make ports not hard coded
 	 */
 	private static void connectToDS(){
 		try {
 			ServerSocket ss = new ServerSocket(4590);
-			s = ss.accept();
+			TCPrecSoket = ss.accept();
+			ss.close();
+			ss = new ServerSocket(4591);
+			TCPsendSocket = ss.accept();
 			ss.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	/**
-	 * Create a scanner that reads messages
+	 * Create a scanner that reads messages from the receive socket
 	 */
 	private static void createScanner() {
-		try {
-			reader = new Scanner(s.getInputStream());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(TCPrecSoket.isConnected()) {
+			try {
+				reader = new Scanner(TCPrecSoket.getInputStream());
+			} catch (IOException e) {
+				System.out.println("Exception while creating scanner:");
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Cannot create scanner - not connected");
 		}
 	}
 	
 	/**
-	 * Creates a print stream that sends messages
+	 * Creates a print stream that sends messages from the send socket
 	 */
 	private static void createPrintStream() {
-		try {
-			ps = new PrintStream(s.getOutputStream());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(TCPsendSocket.isConnected()) {
+			try {
+				ps = new PrintStream(TCPsendSocket.getOutputStream());
+			} catch (IOException e) {
+				System.out.println("Exception while creating print stream:");
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Cannot create print stream - not connected");
 		}
 	}
 	
 	/**
-	 * Sends a JSON message
+	 * Sends a JSON message via the print stream
 	 * @param msg
 	 */
 	public static void sendMessage(JSONArray msg) {
@@ -77,7 +95,7 @@ public class Communicator {
 	 * Returns the next message in the queue
 	 * @return
 	 */
-	public static JSONArray getNextMsg() {
+	public static JSONArray getNextMessage() {
 		if(reader.hasNextLine()) {
 			try {
 				return (JSONArray) parser.parse(reader.nextLine());
@@ -95,5 +113,13 @@ public class Communicator {
 	 */
 	public static boolean hasNextMessage() {
 		return reader.hasNext();
+	}
+	
+	/**
+	 * Gets the connection's target IP
+	 * @return
+	 */
+	public static InetAddress getIP() {
+		return TCPsendSocket.getInetAddress();
 	}
 }

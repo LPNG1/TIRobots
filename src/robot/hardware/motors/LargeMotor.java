@@ -14,15 +14,15 @@ public class LargeMotor extends RobotMotor{
 	}
 	
 	@Override
-	public void setPower(int power) {
+	public void setPower(double power) {
 		//map to 0-800 speed
-		int speed = Math.min(Math.max((Math.abs(power)*8), 0), 800);
+		int speed = (int) Math.min(Math.max((Math.abs(power)*800), 0), 800);
 		
 		l.setSpeed(speed);
 	}
 	
 	@Override
-	public void drive(int power) {
+	public void drive(double power) {
 		this.setPower(power);
 		
 		if(power > 0) {
@@ -57,7 +57,7 @@ public class LargeMotor extends RobotMotor{
 	}
 	
 	@Override
-	public void driveDegrees(int power, int degrees) {
+	public void driveDegrees(double power, int degrees) {
 		this.setPower(power);
 		//TODO: implement in respect to thread interruptions
 	}

@@ -56,9 +56,9 @@ public abstract class RobotMotor {
 	
 	/**
 	 * Set motor power
-	 * @param power % of power between -100 and 100, negative values go backwards
+	 * @param power % of power between -1 and 1, negative values go backwards
 	 */
-	public abstract void setPower(int power);
+	public abstract void setPower(double power);
 	
 	/**
 	 * Stops the motor
@@ -85,13 +85,13 @@ public abstract class RobotMotor {
 	 * Drives the motor for set power until further instruction
 	 * @param power
 	 */
-	public abstract void drive(int power);
+	public abstract void drive(double power);
 	
 	/**
 	 * Drive the motor for set power a certain amount of degrees
 	 * @param power 
 	 * @param degrees
 	 */
-	public abstract void driveDegrees(int power, int degrees);
+	public abstract void driveDegrees(double power, int degrees);
 	
 }
