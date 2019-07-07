@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -95,10 +96,10 @@ public class TCPCommunicator {
 	 * Returns the next message in the queue
 	 * @return
 	 */
-	public static JSONArray getNextMessage() {
+	public static JSONObject getNextMessage() {
 		if(reader.hasNextLine()) {
 			try {
-				return (JSONArray) parser.parse(reader.nextLine());
+				return (JSONObject) parser.parse(reader.nextLine());
 			} catch (ParseException e) {
 				System.out.println("Invalid message!");
 				e.printStackTrace();

@@ -1,20 +1,9 @@
 package main;
 
-import org.json.simple.JSONArray;
-
-import communication.Communicator;
 import communication.tcp.TCPCommunicator;
 import communication.udp.UDPCommunicator;
-import communication.udp.UDPReaderThread;
-import communication.udp.UDPSenderThread;
-import data.JSONCreator;
-import data.JoystickComponent;
 import lejos.hardware.Button;
-import robot.RobotMap;
 import robot.hardware.motors.LargeMotor;
-import robot.hardware.motors.MediumMotor;
-import robot.hardware.sensors.GyroSensor;
-import robot.hardware.sensors.TouchSensor;
 
 public class TestMain {
 
@@ -29,29 +18,42 @@ public class TestMain {
 		//TouchSensor t = new TouchSensor(2);
 		//GyroSensor gyro = new GyroSensor(1);
 		
-		Communicator.initCommuniction();
+		System.out.println("ready for connection");
 		
-		UDPSenderThread send = new UDPSenderThread(50);
+		TCPCommunicator.init();
+		UDPCommunicator.init(TCPCommunicator.getIP());
 		
-		send.start();
 		
-		UDPReaderThread read = new UDPReaderThread();
-		read.start();
+		System.out.println("connected");
 		
-		leftMotor.drive(0.5);
+		while(!TCPCommunicator.hasNextMessage());
 		
-		while(Button.ESCAPE.isUp()) {
-			
-			try {
-				double rotate = -(read.getJoystickData().getComponentValue(JoystickComponent.R_STICK_HOR));
-				double move = -(read.getJoystickData().getComponentValue(JoystickComponent.L_STICK_VER));
-				arcadeDrive(move, rotate);
-			} catch (NullPointerException e) {}
-			
-		}
+		System.out.println(TCPCommunicator.getNextMessage().get("event-id"));
 		
-		read.interrupt();
-		send.interrupt();
+		Button.waitForAnyPress();
+		
+//		
+//		UDPSenderThread send = new UDPSenderThread(50);
+//		
+//		send.start();
+//		
+//		UDPReaderThread read = new UDPReaderThread();
+//		read.start();
+//		
+//		leftMotor.drive(0.5);
+//		
+//		while(Button.ESCAPE.isUp()) {
+//			
+//			try {
+//				double rotate = -(read.getJoystickData().getComponentValue(JoystickComponent.R_STICK_HOR));
+//				double move = -(read.getJoystickData().getComponentValue(JoystickComponent.L_STICK_VER));
+//				arcadeDrive(move, rotate);
+//			} catch (NullPointerException e) {}
+//			
+//		}
+//		
+//		read.interrupt();
+//		send.interrupt();
 	}
 	
 	public static void arcadeDrive(double moveValue, double rotateValue) {
