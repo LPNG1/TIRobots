@@ -7,8 +7,8 @@ public class LargeMotor extends RobotMotor{
 
 	protected EV3LargeRegulatedMotor l;
 	
-	public LargeMotor(String port) {
-		super(MotorType.LARGE, port);
+	public LargeMotor(String port, String name) {
+		super(MotorType.LARGE, port, name);
 		this.l = new EV3LargeRegulatedMotor(this.port);
 		RobotMap.addMotor(this);
 	}
@@ -37,8 +37,8 @@ public class LargeMotor extends RobotMotor{
 	}
 	
 	@Override
-	public void brake() {
-		l.stop();
+	public void brake(boolean immediateReturn) {
+		l.stop(immediateReturn);
 	}
 	
 	@Override

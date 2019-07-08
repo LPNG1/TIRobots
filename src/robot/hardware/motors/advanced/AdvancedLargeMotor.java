@@ -5,8 +5,8 @@ import robot.hardware.motors.LargeMotor;
 
 public class AdvancedLargeMotor extends LargeMotor{
 
-	public AdvancedLargeMotor(String port) {
-		super(port);
+	public AdvancedLargeMotor(String port, String name) {
+		super(port, name);
 	}
 	
 	public EV3LargeRegulatedMotor getHardware() {

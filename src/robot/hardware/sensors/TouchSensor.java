@@ -14,9 +14,9 @@ public class TouchSensor extends RobotSensor{
 	 * TODO: handle bad or taken input for port
 	 * @param port
 	 */
-	public TouchSensor(int port) {
+	public TouchSensor(int port, String name) {
 		
-		super(SensorType.TOUCH, port);
+		super(SensorType.TOUCH, false, port, name);
 		this.t = new EV3TouchSensor(this.port);
 		s = this.t.getTouchMode();
 		RobotMap.addSensor(this);

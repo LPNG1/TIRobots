@@ -14,9 +14,9 @@ public class ColorSensor extends RobotSensor{
 	 * TODO: handle bad or taken input for port
 	 * @param port
 	 */
-	public ColorSensor(int port) {
+	public ColorSensor(int port, String name) {
 		
-		super(SensorType.COLOR, port);
+		super(SensorType.COLOR, false, port, name);
 		this.c = new EV3ColorSensor(this.port);
 		s = this.c.getColorIDMode();
 		RobotMap.addSensor(this);

@@ -11,8 +11,8 @@ import robot.hardware.sensors.ColorSensor;
  */
 public class AdvancedColorSensor extends ColorSensor{
 
-	public AdvancedColorSensor(int port) {
-		super(port);
+	public AdvancedColorSensor(int port, String name) {
+		super(port, name);
 	}
 	
 	public EV3ColorSensor getHardware() {

@@ -14,9 +14,9 @@ public class GyroSensor extends RobotSensor{
 	 * TODO: handle bad or taken input for port
 	 * @param port
 	 */
-	public GyroSensor(int port) {
+	public GyroSensor(int port, String name) {
 		
-		super(SensorType.GYRO, port);
+		super(SensorType.GYRO, false, port, name);
 		this.g = new EV3GyroSensor(this.port);
 		s = this.g.getAngleMode();
 		RobotMap.addSensor(this);

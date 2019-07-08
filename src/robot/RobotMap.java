@@ -63,4 +63,36 @@ public class RobotMap {
 	public static RobotSensor[] getSensors() {
 		return sensors;
 	}
+	
+	/**
+	 * Get a specific motor by name
+	 * @param name
+	 * @return
+	 */
+	public static RobotMotor getMotor(String name) {
+		for (int i = 0; i < motors.length; i++) {
+			if(motors[i] != null && motors[i].getName() == name) {
+				return motors[i];
+			}
+		}
+		System.out.println("Invalid motor name!");
+		return null;
+	}
+	
+	/**
+	 * Get a specific sensor by name
+	 * @param name
+	 * @return
+	 */
+	public static RobotSensor getSensor(String name) {
+		for (int i = 0; i < sensors.length; i++) {
+			if(sensors[i] != null && sensors[i].getName() == name) {
+				return sensors[i];
+			}
+		}
+		System.out.println("Invalid sensor name!");
+		return null;
+	}
+	
+	
 }

@@ -14,9 +14,9 @@ public class UltrasonicSensor extends RobotSensor{
 	 * TODO: handle bad or taken input for port
 	 * @param port
 	 */
-	public UltrasonicSensor(int port) {
+	public UltrasonicSensor(int port, String name) {
 		
-		super(SensorType.ULTRASONIC, port);
+		super(SensorType.ULTRASONIC, false, port, name);
 		this.u = new EV3UltrasonicSensor(this.port);
 		s = this.u.getDistanceMode();
 		RobotMap.addSensor(this);

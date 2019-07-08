@@ -12,8 +12,8 @@ public class TestMain {
 	
 	public static void main(String[] args) {
 
-		leftMotor = new LargeMotor("B");
-		rightMotor = new LargeMotor("C");
+		leftMotor = new LargeMotor("B", "leftMotor");
+		rightMotor = new LargeMotor("C", "rightMotor");
 		//MediumMotor arm = new MediumMotor("D");
 		//TouchSensor t = new TouchSensor(2);
 		//GyroSensor gyro = new GyroSensor(1);
@@ -21,7 +21,7 @@ public class TestMain {
 		System.out.println("ready for connection");
 		
 		TCPCommunicator.init();
-		UDPCommunicator.init(TCPCommunicator.getIP());
+		UDPCommunicator.init();
 		
 		
 		System.out.println("connected");

@@ -10,8 +10,8 @@ import robot.hardware.sensors.GyroSensor;
  */
 public class AdvancedGyroSensor extends GyroSensor{
 
-	public AdvancedGyroSensor(int port) {
-		super(port);
+	public AdvancedGyroSensor(int port, String name) {
+		super(port, name);
 	}
 	
 	public EV3GyroSensor getHardware() {

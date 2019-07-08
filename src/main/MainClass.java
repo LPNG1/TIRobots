@@ -1,5 +1,16 @@
 package main;
 
+import communication.tcp.TCPCommunicator;
+import communication.udp.UDPCommunicator;
+import communication.udp.UDPReaderThread;
+import communication.udp.UDPSenderThread;
+import data.JoystickComponent;
+import lejos.hardware.Button;
+import lejos.utility.Delay;
+import main.user.HardwareCreator;
+import robot.RobotMap;
+import robot.hardware.motors.LargeMotor;
+
 public class MainClass {
 	
 	public static void main(String[] args) {
@@ -18,6 +29,48 @@ public class MainClass {
 		 * 
 		 */
 		
+		System.out.println("Code started");
+		System.out.println("Init hardware");
+		
+		HardwareCreator.init();
+		
+		System.out.println("Wait for connection");
+		
+		TCPCommunicator.init();
+		
+		System.out.println("Open UDP socket");
+		
+		UDPCommunicator.init();
+		
+		System.out.println("Starting threads");
+		
+		UDPSenderThread send = new UDPSenderThread(50);
+		UDPReaderThread read = new UDPReaderThread();
+		
+		send.start();
+		read.start();
+		
+		System.out.println("Ready");
+		
+		//now create action handler and start doing stuff
+		
+		
+		while(Button.ESCAPE.isUp()) {
+			try {
+				System.out.println(read.getJoystickData().getComponentValue(JoystickComponent.BUTTON_A));
+			} catch(NullPointerException e) {
+				System.out.println("Null");
+			}
+			
+		}
+		
+		send.deactivate();
+		read.deactivate();
+		
+		System.out.println(send.isAlive());
+		System.out.println(read.isAlive());
+		
+		Button.waitForAnyPress();
 		
 	}
 	

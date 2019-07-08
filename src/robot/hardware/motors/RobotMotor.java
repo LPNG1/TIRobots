@@ -7,6 +7,7 @@ public abstract class RobotMotor {
 
 	private MotorType type;
 	private String portName;
+	private String motorName;
 	protected Port port;
 	
 	/**
@@ -15,9 +16,10 @@ public abstract class RobotMotor {
 	 * @param type
 	 * @param port
 	 */
-	public RobotMotor(MotorType type, String port) {
+	public RobotMotor(MotorType type, String port, String name) {
 		this.type = type;
 		this.portName = port;
+		this.motorName = name;
 		setPort(port);
 	}
 	
@@ -54,6 +56,10 @@ public abstract class RobotMotor {
 		return "null";
 	}
 	
+	public String getName() {
+		return this.motorName;
+	}
+	
 	/**
 	 * Set motor power
 	 * @param power % of power between -1 and 1, negative values go backwards
@@ -63,7 +69,7 @@ public abstract class RobotMotor {
 	/**
 	 * Stops the motor
 	 */
-	public abstract void brake();
+	public abstract void brake(boolean immediateReturn);
 	
 	/**
 	 * Stops powering the motor until it coasts to a stop

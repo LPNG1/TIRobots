@@ -7,8 +7,8 @@ public class MediumMotor extends RobotMotor{
 
 	protected EV3MediumRegulatedMotor m;
 	
-	public MediumMotor(String port) {
-		super(MotorType.LARGE, port);
+	public MediumMotor(String port, String name) {
+		super(MotorType.LARGE, port, name);
 		this.m = new EV3MediumRegulatedMotor(this.port);
 		RobotMap.addMotor(this);
 	}
@@ -37,8 +37,8 @@ public class MediumMotor extends RobotMotor{
 	}
 	
 	@Override
-	public void brake() {
-		m.stop();
+	public void brake(boolean immediateReturn) {
+		m.stop(immediateReturn);
 	}
 	
 	@Override

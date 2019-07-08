@@ -10,8 +10,8 @@ import robot.hardware.sensors.TouchSensor;
  */
 public class AdvancedTouchSensor extends TouchSensor{
 
-	public AdvancedTouchSensor(int port) {
-		super(port);
+	public AdvancedTouchSensor(int port, String name) {
+		super(port, name);
 	}
 	
 	public EV3TouchSensor getHardware() {

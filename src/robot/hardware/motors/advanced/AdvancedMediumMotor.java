@@ -5,8 +5,8 @@ import robot.hardware.motors.MediumMotor;
 
 public class AdvancedMediumMotor extends MediumMotor{
 
-	public AdvancedMediumMotor(String port) {
-		super(port);
+	public AdvancedMediumMotor(String port, String name) {
+		super(port, name);
 	}
 	
 	public EV3MediumRegulatedMotor getHardware() {

@@ -10,8 +10,8 @@ import robot.hardware.sensors.UltrasonicSensor;
  */
 public class AdvancedUltrasonicSensor extends UltrasonicSensor{
 
-	public AdvancedUltrasonicSensor(int port) {
-		super(port);
+	public AdvancedUltrasonicSensor(int port, String name) {
+		super(port, name);
 	}
 	
 	public EV3UltrasonicSensor getHardware() {

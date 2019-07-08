@@ -13,9 +13,7 @@ import robot.RobotMap;
  */
 public class UDPSenderThread extends Thread{
 	
-	private volatile boolean active;
-	private JSONArray msg = null;
-	
+	private boolean active = false;
 	private long messageInterval;
 	
 	public UDPSenderThread(long interval) {
@@ -25,9 +23,9 @@ public class UDPSenderThread extends Thread{
 	@Override
 	public void run() {
 		
-		this.active = true;
+		active = true;
 		
-		while(!this.isInterrupted()) {
+		while(active) {
 			JSONArray msg = JSONCreator.createSendableJSON(RobotMap.getSensors(), RobotMap.getMotors());
 			UDPCommunicator.sendMessage(msg);
 			msg = null;
@@ -39,12 +37,15 @@ public class UDPSenderThread extends Thread{
 			}
 		}
 		
-		this.active = false;
-		
 	}
 	
 	public boolean isActive() {
 		return this.active;
+	}
+	
+	public void deactivate() {
+		active = false;
+		this.interrupt();
 	}
 	
 }

@@ -10,6 +10,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import communication.tcp.TCPCommunicator;
+
 public class UDPCommunicator {
 	private static DatagramSocket UDPSendSocket;
 	private static DatagramSocket UDPRecSocket;
@@ -22,7 +24,7 @@ public class UDPCommunicator {
 	
 	private static JSONParser parser = new JSONParser();
 	
-	public static void init(InetAddress ip) {
+	public static void init() {
 		sendPort = 4591;
 		recPort = 4590;
 		
@@ -32,8 +34,12 @@ public class UDPCommunicator {
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
-		driverStationIP = ip;
-
+		
+		if(TCPCommunicator.getIP() != null) {
+			driverStationIP = TCPCommunicator.getIP();
+		} else {
+			System.out.println("Error - No connection");
+		}
 	}
 	
 	public static void sendMessage(JSONArray msg) {

@@ -10,8 +10,10 @@ import lejos.hardware.port.SensorPort;
  */
 public abstract class RobotSensor {
 
-	protected SensorType type;
-	protected int portName;
+	private  SensorType type;
+	private int portName;
+	private String sensorName;
+	private boolean resetable;
 	protected Port port;
 
 	/**
@@ -19,10 +21,11 @@ public abstract class RobotSensor {
 	 * @param type
 	 * @param port
 	 */
-	public RobotSensor(SensorType type, int port) {
-		
+	public RobotSensor(SensorType type, boolean resetable, int port, String name) {
 		this.type = type;
 		this.portName = port;
+		this.sensorName = name;
+		this.resetable = resetable;
 		setPort(port);
 	}
 	
@@ -61,6 +64,14 @@ public abstract class RobotSensor {
 			return "ultrasonic";
 		}
 		return "null";
+	}
+	
+	public String getName() {
+		return this.sensorName;
+	}
+	
+	public boolean canReset() {
+		return this.resetable;
 	}
 	
 	/**
