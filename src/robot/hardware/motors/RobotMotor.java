@@ -98,6 +98,6 @@ public abstract class RobotMotor {
 	 * @param power 
 	 * @param degrees
 	 */
-	public abstract void driveDegrees(double power, int degrees);
+	public abstract void driveDegrees(double power, int degrees, boolean immediateReturn);
 	
 }

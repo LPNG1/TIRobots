@@ -9,6 +9,7 @@ public class HardwareCreator{
 		//e.g. new LargeMotor("B", "leftMotor");
 		
 		new LargeMotor("B", "leftMotor");
+		new LargeMotor("C", "rightMotor");
 		
 	}
 

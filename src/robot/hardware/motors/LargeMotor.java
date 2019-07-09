@@ -57,9 +57,17 @@ public class LargeMotor extends RobotMotor{
 	}
 	
 	@Override
-	public void driveDegrees(double power, int degrees) {
-		this.setPower(power);
-		//TODO: implement in respect to thread interruptions
+	public void driveDegrees(double power, int degrees, boolean immediateReturn) {
+		this.drive(power);
+		int startEncoderValue = this.readEncoder();
+		
+		if(power > 0) {
+			while(this.readEncoder() < startEncoderValue + degrees && !Thread.currentThread().isInterrupted());
+		} if (power < 0) {
+			while(this.readEncoder() > startEncoderValue - degrees && !Thread.currentThread().isInterrupted());
+		}
+		
+		this.brake(immediateReturn);
 	}
 	
 }

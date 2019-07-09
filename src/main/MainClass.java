@@ -54,15 +54,7 @@ public class MainClass {
 		
 		//now create action handler and start doing stuff
 		
-		
-		while(Button.ESCAPE.isUp()) {
-			try {
-				System.out.println(read.getJoystickData().getComponentValue(JoystickComponent.BUTTON_A));
-			} catch(NullPointerException e) {
-				System.out.println("Null");
-			}
-			
-		}
+		while(Button.ESCAPE.isUp());
 		
 		send.deactivate();
 		read.deactivate();
