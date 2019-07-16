@@ -1,6 +1,8 @@
 package main.user;
 
 import robot.hardware.motors.LargeMotor;
+import robot.hardware.sensors.GyroSensor;
+import robot.hardware.sensors.TouchSensor;
 
 public class HardwareCreator{
 
@@ -10,6 +12,9 @@ public class HardwareCreator{
 		
 		new LargeMotor("B", "leftMotor");
 		new LargeMotor("C", "rightMotor");
+		
+		new TouchSensor(3, "touch");
+		new GyroSensor(1, "gyro");
 		
 	}
 

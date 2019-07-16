@@ -1,6 +1,8 @@
 package robot.hardware.motors;
 
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.robotics.RegulatedMotor;
+import main.EventManager;
 import robot.RobotMap;
 
 public class LargeMotor extends RobotMotor{
@@ -62,9 +64,9 @@ public class LargeMotor extends RobotMotor{
 		int startEncoderValue = this.readEncoder();
 		
 		if(power > 0) {
-			while(this.readEncoder() < startEncoderValue + degrees && !Thread.currentThread().isInterrupted());
+			while(this.readEncoder() < startEncoderValue + degrees && EventManager.getCurrentThread().isActive());
 		} if (power < 0) {
-			while(this.readEncoder() > startEncoderValue - degrees && !Thread.currentThread().isInterrupted());
+			while(this.readEncoder() > startEncoderValue - degrees && EventManager.getCurrentThread().isActive());
 		}
 		
 		this.brake(immediateReturn);

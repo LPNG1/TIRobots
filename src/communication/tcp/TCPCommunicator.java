@@ -88,7 +88,7 @@ public class TCPCommunicator {
 	 * Sends a JSON message via the print stream
 	 * @param msg
 	 */
-	public static void sendMessage(JSONArray msg) {
+	public static void sendMessage(JSONObject msg) {
 		ps.println(msg);
 	}
 	

@@ -2,6 +2,7 @@ package robot.hardware.motors;
 
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.Port;
+import lejos.robotics.RegulatedMotor;
 
 public abstract class RobotMotor {
 
@@ -12,7 +13,7 @@ public abstract class RobotMotor {
 	
 	/**
 	 * Constructor for a general motor
-	 * TODO: handle invalid or taken port unputs
+	 * TODO: handle invalid or taken port inputs
 	 * @param type
 	 * @param port
 	 */
